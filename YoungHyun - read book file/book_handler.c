@@ -18,7 +18,7 @@ typedef struct __bookStruct
 int main(void)
 {
     // Temp string for line input
-    char tempString[99];
+    char tempString[999];
 
     // dynamic alloc for head node
     bookStruct *bookHeadNode = (bookStruct *)(malloc(sizeof(bookStruct)));
@@ -26,7 +26,7 @@ int main(void)
     // dynamic alloc for normal node
     bookStruct *bookNode = (bookStruct *)(malloc(sizeof(bookStruct)));
 
-    bookHeadNode->nextNode = bookNode;
+    bookHeadNode = bookNode;
 
     // File handling
     FILE *bookFileReadStream = fopen("book.txt", "r");
@@ -43,8 +43,10 @@ int main(void)
         bookNode->location = strtok(NULL, "|");
         bookNode->canBorrow = strtok(NULL, "|")[0];
 
+        // printf("%d | %s | %s | %s | %s | %c | %d\n", bookNode->bookNumber, bookNode->bookName, bookNode->publisher, bookNode->author, bookNode->location, bookNode->canBorrow, bookNode->ISBN);
+
         // dynamic alloc for next node
-        // move node pointer to next node
+        // move node index to next node
         bookStruct *tempBookNode = (bookStruct *)(malloc(sizeof(bookStruct)));
         bookNode->nextNode = tempBookNode;
         bookNode = tempBookNode;
@@ -56,10 +58,12 @@ int main(void)
     }
     fclose(bookFileReadStream);
 
-    bookNode = bookHeadNode->nextNode;
+    // set node index to first node.
+    bookNode = bookHeadNode;
     while (bookNode->nextNode != NULL)
     {
-        printf("%s\n", bookNode->bookName);
+        printf("%d | %s | %s | %s | %s | %c | %d\n", bookNode->bookNumber, bookNode->bookName, bookNode->publisher, bookNode->author, bookNode->location, bookNode->canBorrow, bookNode->ISBN);
+        // printf("%s\n", bookNode->publisher);
         bookNode = bookNode->nextNode;
     }
 }
