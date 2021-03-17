@@ -1,0 +1,30 @@
+20160001|aa0001|kimdonggyu|korea geochang|010-1111-1111
+20160002|bb0002|kimdongwoon|korea songpha 1234|010-2222-2222
+20160003|cc0003|kimsoeun|korea 36 jaamullo Metropolitan Seoul|010-3333-3333
+20160004|dd0004|simjiyeong|the Republic of Korea Yongsan|010-4444-4444
+20160005|ee0005|Dongjakgu|Seoul and hat Sadangno 20|010-5555-5555
+20160006|ff0006|jyussi|Dongjakgu Seoul Sadangno 20|010-6666-6666
+20160007|gg0007|households|a grain of Hangang daero 72 Yongsangu Seoul 3|010-7777-7777
+20160008|hh0008|metershigh|Dean intestinal Manangu Anyangsi Gyeonggido|010-8888-8888
+20160009|ii0009|DeanDean|Yeouidodong Yeongdeungpogu Seoul Hosung|010-9999-9999
+20160010|jj0010|eljigeuraem|Yeongdeungpogu Seoul Metropolitan Government as soon as yeouilg Twin Towers|010-1010-1010
+20160011|kk0011|Nonhyeondong|Gangnamgu Seoul Kim Junsu|010-1101-1101
+20160012|ll0012|lenticwater|Seogu Busan Studio 26 to 28 beongi gudeongno|010-1212-1212
+20160013|mm0013|Pildongrogil| Junggu Seoul Lee Kyuhyun|010-1313-1313
+20160014|nn0014|sontaegyun|the Philippines three balleseuju Saint Philip village ballingkaging|010-1414-1414
+20160015|oo0015|StMary|building with Jangseungbaegil Dongjakgu Seoul jiako|010-1515-1515
+20160016|pp0016|gimajeong|Jungnanggu Seoul sangbongno|010-1616-1616
+20160017|qq0017|sleepyNaksan|4gil Jongnogu Seoul will be 46|010-1717-1717
+20160018|rr0018|Iwanttogotosleep|Dobongdong Dobonggu Seoul Metropolitan Government|010-1818-1818
+20160019|ss0019|Oyadong|Sujeonggu Seongnamsi Gyeonggido|010-1919-1919
+20160020|tt0020|Yeoju|Gyeonggi Province suddenly Sejongno Boulevard beongi|010-2020-2020
+20160021|uu0021|LackBongam|Gongdan 6gil MasanHoiwongu Changwonsi Gyeongsangnamdo 35 South Gyeongsang Province|010-2121-2121
+20160022|vv0022|Youcanchange|only stir that base the North Jeolla Province Sangseomyeon Buangun|010-2212-2212
+20160023|ww0023|Pyeongtaek|the car of corn silk of Gyonggi University|010-2323-2323
+20160024|xx0024|PyeongtaekGyeonggiProvince|corn silk of Gyonggi University|010-2424-2424
+20160025|yy0025|Soongsil|Soongsil University Dongjakgu Seoul Metropolitan Government|02-2525-2525
+20160026|zz0026|gangyunjeong|Sangdodong Dongjak-gu Seoul Metropolitan Government|010-2626-2626
+20160027|aaa0027|Republic|Park Jinwoo Daeseongri Gyeonggi Province|010-2727-2727
+20160028|bbb0028|gimjaeu|Gwanghuidong 1ga Junggu Seoul|02-2828-2828
+20160029|ccc0029|Gwanangno|Seoul National University Gwanakgu Seoul National University choejin|010-2929-2929
+20160030|ddd0030|baksseuru|Gangnamgu Seoul Metropolitan Government Seolleungno jeongin Bldg 44 gil|010-3030-3030
