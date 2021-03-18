@@ -59,9 +59,26 @@ void readFileToStruct_Client();
 void readFileToStruct_Book();
 void readFileToStruct_Borrow();
 
+void menuPresenter_BookSearch();
 void menuPresenter_LibraryMain();
 
+void clientWithdraw();
+void showMyRentalList();
+void updateMyProfile();
+void login();
 void signUp();
+void registerBook();
+void removeBook();
+void rentalBook();
+void returnBook();
+void menuPresenter_BookSearch();
+void printClientList();
+
+void searchBookByName();
+void searchBookByPublisher();
+void searchBookByISBN();
+void searchBookByAuthor();
+void searchBookByAll();
 
 void saveStringByDynamicAlloc(char **destPtr, char *sourcePtr);
 void printLog(char *message);
@@ -90,7 +107,6 @@ void readFileToStruct_Client()
     char tempString[999];
     char *tempTokPtr;
 
-    // clientHeadNode = (clientStruct *)(malloc(sizeof(clientStruct)));
     clientNode = (clientStruct *)(malloc(sizeof(clientStruct)));
 
     clientHeadNode = clientNode;
@@ -228,6 +244,8 @@ void readFileToStruct_Borrow()
     printLog("Read borrow.txt success");
 }
 
+// TODO: struct를 txt로 저장하는 함수들 전부 - 영현
+
 // ************************************************************
 // * 메모리상의 구조체의 내용을 출력하는 함수들입니다.        *
 // ************************************************************
@@ -267,17 +285,163 @@ void menuPresenter_LibraryMain()
         switch (menuSelected)
         {
         case 1:
-            // TODO:
             signUp();
             break;
         case 2:
-            /* code */
+            login();
             break;
         case 3:
-            /* code */
+            exit(1);
             break;
 
         default:
+            printf("잘못 입력하셨습니다.");
+            break;
+        }
+    }
+}
+
+// 일반 회원 페이지를 출력하는 함수입니다.
+void menuPresenter_NormalClient()
+{
+    // 사용자가 입력한 메뉴 번호를 담는 변수입니다.
+    short menuSelected;
+
+    // 잘못 입력하거나, 로그아웃 시에 다시 돌아와야합니다.
+    while (1)
+    {
+        printf("\n>>회원 메뉴<<\n");
+        printf("1. 도서 검색\n");
+        printf("2. 내 대여 목록\n");
+        printf("3. 개인정보 수정\n");
+        printf("4. 회원 탈퇴\n");
+        printf("5. 로그아웃\n");
+        printf("6. 프로그램 종료\n\n");
+        printf("번호를 선택하세요: ");
+
+        scanf("%hd", &menuSelected);
+        switch (menuSelected)
+        {
+        case 1:
+            menuPresenter_BookSearch();
+            break;
+        case 2:
+            showMyRentalList();
+            break;
+        case 3:
+            updateMyProfile();
+            break;
+        case 4:
+            clientWithdraw();
+            break;
+        case 5:
+            return;
+            break;
+        case 6:
+            exit(1);
+            break;
+        default:
+            printf("잘못 입력하셨습니다.");
+            break;
+        }
+    }
+}
+
+// 관리자 페이지를 출력하는 함수입니다.
+void menuPresenter_Administrator()
+{
+    // 사용자가 입력한 메뉴 번호를 담는 변수입니다.
+    short menuSelected;
+
+    // 잘못 입력하거나, 로그아웃 시에 다시 돌아와야합니다.
+    while (1)
+    {
+        printf("\n>>회원 메뉴<<\n");
+        printf("1. 도서 등록\n");
+        printf("2. 도서 삭제\n");
+        printf("3. 도서 대여\n");
+        printf("4. 도서 반납\n");
+        printf("5. 도서 검색\n");
+        printf("6. 회원 목록\n");
+        printf("7. 로그아웃\n");
+        printf("8. 프로그램 종료\n\n");
+        printf("번호를 선택하세요: ");
+
+        scanf("%hd", &menuSelected);
+        switch (menuSelected)
+        {
+        case 1:
+            registerBook();
+            break;
+        case 2:
+            removeBook();
+            break;
+        case 3:
+            rentalBook();
+            break;
+        case 4:
+            returnBook();
+            break;
+        case 5:
+            menuPresenter_BookSearch();
+            break;
+        case 6:
+            printClientList();
+            break;
+        case 7:
+            return;
+            break;
+        case 8:
+            exit(1);
+            break;
+        default:
+            printf("잘못 입력하셨습니다.");
+            break;
+        }
+    }
+}
+
+// 책 검색 페이지를 출력하는 함수입니다.
+void menuPresenter_BookSearch()
+{
+    // 사용자가 입력한 메뉴 번호를 담는 변수입니다.
+    short menuSelected;
+
+    // 잘못 입력하거나, 로그아웃 시에 다시 돌아와야합니다.
+    while (1)
+    {
+        printf("\n>>도서 검색<<\n");
+        printf("1. 도서명 검색\n");
+        printf("2. 출판사 검색\n");
+        printf("3. ISBN 검색\n");
+        printf("4. 저자명 검색\n");
+        printf("5. 전체 검색\n");
+        printf("6. 이전 메뉴\n\n");
+        printf("번호를 선택하세요: ");
+
+        scanf("%hd", &menuSelected);
+        switch (menuSelected)
+        {
+        case 1:
+            searchBookByName();
+            break;
+        case 2:
+            searchBookByPublisher();
+            break;
+        case 3:
+            searchBookByISBN();
+            break;
+        case 4:
+            searchBookByAuthor();
+            break;
+        case 5:
+            searchBookByAll();
+            break;
+        case 6:
+            return;
+            break;
+        default:
+            printf("잘못 입력하셨습니다.");
             break;
         }
     }
@@ -351,9 +515,119 @@ void signUp()
 // 로그인을 담당하는 함수입니다.
 void login()
 {
-    printLog("로그인에 대한 기능을 구현해야합니다.");
-    // TODO: 로그인 기능 구현
+    while (1)
+    {
+        printLog("로그인에 대한 기능을 구현해야합니다.");
+        // TODO: 로그인 기능 구현 / 서현님
+        printLog("1을 입력하면 회원메뉴, 2를 입력하면 관리자 메뉴로 갑니다.");
+
+        /* 일반 회원, 관리자 메뉴에서 "로그아웃"을 하면 다시 이 곳으로 돌아옵니다.
+"로그아웃"은 return으로 구현됩니다. 따라서 이 곳에서 while(1)문으로 처리해줘야합니다. */
+
+        int a;
+        scanf("%d", &a);
+        if (a == 1)
+        {
+            menuPresenter_NormalClient();
+        }
+        else
+        {
+            menuPresenter_Administrator();
+        }
+    }
 }
+
+// 내 도서 대여 목록을 보여주는 함수입니다.
+void showMyRentalList()
+{
+    printLog("내 도서 대여 목록을 보여줘야합니다.");
+    // TODO: 서현님
+}
+
+// 개인정보를 업데이트하는 함수입니다.
+void updateMyProfile()
+{
+    printLog("내 개인정보 수정을 구현해야 합니다.");
+    // TODO: 서현님
+}
+
+// 회원 탈퇴를 담당하는 함수입니다.
+void clientWithdraw()
+{
+    printLog("회원 탈퇴를 구현해야합니다.");
+    // TODO: 서현님
+}
+
+// 회원 목록 출력을 담당하는 함수입니다.
+void printClientList()
+{
+    printLog("회원 목록 출력을 구현해야합니다.");
+    // TODO: 서현님
+}
+
+// 도서를 등록하는 함수입니다.
+void registerBook()
+{
+    printLog("도서 등록을 구현해야합니다.");
+    // TODO: 민비 & 세연님
+}
+
+// 도서를 삭제하는 함수입니다.
+void removeBook()
+{
+    printLog("도서 삭제를 구현해야합니다.");
+    // TODO: 민비 & 세연님
+}
+
+// 도서를 대여하는 함수입니다.
+void rentalBook()
+{
+    printLog("도서 대여를 구현해야합니다.");
+    // TODO: 민비 & 세연님
+}
+
+// 도서를 반납하는 함수입니다.
+void returnBook()
+{
+    printLog("도서 반납을 구현해야합니다.");
+    // TODO: 민비 & 세연님
+}
+
+// 도서를 검색하는 함수입니다 - byName
+void searchBookByName()
+{
+    printLog("도서 검색을 구현해야합니다. byName");
+    // TODO: 영현님
+}
+
+// 도서를 검색하는 함수입니다 - byPublisher
+void searchBookByPublisher()
+{
+    printLog("도서 검색을 구현해야합니다. byPublisher");
+    // TODO: 영현님
+}
+
+// 도서를 검색하는 함수입니다 - byISBN
+void searchBookByISBN()
+{
+    printLog("도서 검색을 구현해야합니다. byISBN");
+    // TODO: 영현님
+}
+
+// 도서를 검색하는 함수입니다 - byAuthor
+void searchBookByAuthor()
+{
+    printLog("도서 검색을 구현해야합니다. byAuthor");
+    // TODO: 영현님
+}
+
+// 도서를 검색하는 함수입니다 - byAll
+void searchBookByAll()
+{
+    printLog("도서 검색을 구현해야합니다. byAll");
+    // TODO: 영현님
+}
+
 // ************************************************************
 // * 실제 로직에 직접 연관이 있지 않은, string 저장과 같은  *
 // * 유용한 함수들이 모여있는 곳입니다.                       *
