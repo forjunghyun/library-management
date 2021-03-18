@@ -86,12 +86,11 @@ int main(void)
 
 // client.txt를 clientStruct에 저장하는 함수입니다.
 void readFileToStruct_Client()
-
 {
     char tempString[999];
     char *tempTokPtr;
 
-    clientHeadNode = (clientStruct *)(malloc(sizeof(clientStruct)));
+    // clientHeadNode = (clientStruct *)(malloc(sizeof(clientStruct)));
     clientNode = (clientStruct *)(malloc(sizeof(clientStruct)));
 
     clientHeadNode = clientNode;
@@ -236,7 +235,7 @@ void readFileToStruct_Borrow()
 void printStruct_Client()
 {
     clientNode = clientHeadNode;
-    while (clientNode != NULL)
+    while (clientNode->nextNode != NULL)
     {
         printf("%d | %s | %s | %s | %s\n", clientNode->studentNumber, clientNode->password, clientNode->name, clientNode->address, clientNode->phoneNumber);
         clientNode = clientNode->nextNode;
@@ -268,6 +267,7 @@ void menuPresenter_LibraryMain()
         switch (menuSelected)
         {
         case 1:
+            // TODO:
             signUp();
             break;
         case 2:
@@ -348,6 +348,12 @@ void signUp()
     printStruct_Client();
 }
 
+// 로그인을 담당하는 함수입니다.
+void login()
+{
+    printLog("로그인에 대한 기능을 구현해야합니다.");
+    // TODO: 로그인 기능 구현
+}
 // ************************************************************
 // * 실제 로직에 직접 연관이 있지 않은, string 저장과 같은  *
 // * 유용한 함수들이 모여있는 곳입니다.                       *
