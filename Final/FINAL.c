@@ -1,12 +1,28 @@
+#pragma warning(disable : 4996)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#pragma warning(disable : 4996)
+#include <stdint.h>
+#define ONE_DAY (1 * 60 * 60 * 24)                                    // 1일을 초로
+#define UTC_TIME_WEEKDAY_OFFSET (4) /* 1970,1,1은 목요일이기때문에 */ // UTC 시작 시간
 
-// time_t를 정의하는 부분입니다.
-typedef long int time_t;
+typedef uint32_t timestamp_t; //seconds, unix시간 seconds 부분 다시 재정의한 부분
+
+//날짜                    x, 1월, 2월 ..... 11월, 12월
+uint8_t month_days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 // Struct Type들을 정의하는 부분입니다.
+typedef struct
+{
+    uint16_t year;
+    uint8_t month;
+    uint8_t day;
+    uint8_t hour;
+    uint8_t minute;
+    uint8_t second;
+    uint8_t week;
+    uint8_t weekday;
+} datetime_t;
 typedef struct __clientStruct
 {
     int studentNumber;
@@ -34,8 +50,8 @@ typedef struct __borrowStruct
 {
     int studentNumber;
     int bookNumber;
-    time_t borrowTime;
-    time_t returnTime;
+    timestamp_t borrowTime;
+    timestamp_t returnTime;
 
     struct __borrowStruct *nextNode;
 
@@ -45,6 +61,7 @@ typedef struct __borrowStruct
 clientStruct *clientHeadNode;
 clientStruct *clientNode;
 clientStruct *tempClientNode;
+clientStruct *clientLoggedIn;
 
 bookStruct *bookHeadNode;
 bookStruct *bookNode;
@@ -81,6 +98,9 @@ void searchBookByAuthor();
 void searchBookByAll();
 
 void saveStringByDynamicAlloc(char **destPtr, char *sourcePtr);
+uint8_t timestamp_to_weekday(timestamp_t timestamp_sec);
+int is_leap_year(uint16_t year);
+void utc_timestamp_to_date(timestamp_t timestamp, datetime_t *datetime);
 void printLog(char *message);
 
 // 프로그램 메인 실행 부분입니다.
@@ -515,53 +535,182 @@ void signUp()
 // 로그인을 담당하는 함수입니다.
 void login()
 {
-    while (1)
+    int tempInt;
+    char tempString[50];
+    int true = 1;
+    clientStruct *temphead = clientHeadNode;
+
+    while (true)
     {
-        printLog("로그인에 대한 기능을 구현해야합니다.");
-        // TODO: 로그인 기능 구현 / 서현님
-        printLog("1을 입력하면 회원메뉴, 2를 입력하면 관리자 메뉴로 갑니다.");
+        printf("로그인명(학번) : ");
+        scanf("%s", tempString);
 
-        /* 일반 회원, 관리자 메뉴에서 "로그아웃"을 하면 다시 이 곳으로 돌아옵니다.
-"로그아웃"은 return으로 구현됩니다. 따라서 이 곳에서 while(1)문으로 처리해줘야합니다. */
-
-        int a;
-        scanf("%d", &a);
-        if (a == 1)
-        {
-            menuPresenter_NormalClient();
-        }
-        else
+        if (strcmp(tempString, "admin") == 0)
         {
             menuPresenter_Administrator();
+        }
+
+        else
+        {
+            tempInt = atoi(tempString);
+            printf("비밀번호 입력 : ");
+            scanf("%s", tempString);
+
+            while (temphead->nextNode != NULL)
+            {
+                if (temphead->studentNumber == tempInt && strcmp(temphead->password, tempString) == 0)
+                {
+                    clientLoggedIn = clientNode;
+                    menuPresenter_NormalClient();
+                    true = 0;
+                }
+                else
+                {
+                    temphead = temphead->nextNode;
+                }
+            }
+
+            if (temphead->nextNode == NULL)
+            {
+                printf("없는 회원입니다.");
+            }
         }
     }
 }
 
 // 내 도서 대여 목록을 보여주는 함수입니다.
+
 void showMyRentalList()
 {
-    printLog("내 도서 대여 목록을 보여줘야합니다.");
-    // TODO: 서현님
+    timestamp_t unix_timestamp1;
+    timestamp_t unix_timestamp2;
+    datetime_t datetime1;
+    datetime_t datetime2;
+
+    borrowStruct *tempHead = borrowHeadNode;
+    printf(">>내 대여 도서 목록<<\n");
+    while (tempHead->nextNode != NULL)
+    {
+        if (tempHead->studentNumber == clientLoggedIn->studentNumber)
+        {
+
+            printf("도서 번호 : %08d\n", tempHead->bookNumber);
+
+            unix_timestamp1 = tempHead->borrowTime;
+            utc_timestamp_to_date(unix_timestamp1, &datetime1);
+            printf("대여일짜 : %d년 %d월 %d일 %d시 %d 분\n", datetime1.year, datetime1.month, datetime1.day, datetime1.hour, datetime1.minute);
+
+            unix_timestamp2 = tempHead->returnTime;
+            utc_timestamp_to_date(unix_timestamp2, &datetime1);
+            printf("반납일짜 : %d년 %d월 %d일 %d시 %d 분\n", datetime2.year, datetime2.month, datetime2.day, datetime2.hour, datetime2.minute);
+            break;
+        }
+        else
+        {
+            tempHead = tempHead->nextNode;
+        }
+    }
 }
 
 // 개인정보를 업데이트하는 함수입니다.
+
 void updateMyProfile()
 {
-    printLog("내 개인정보 수정을 구현해야 합니다.");
+    int selectNum;
+    char tempString[100];
+
+    printf("1.비밀번호\t2.주소\t3.전화번호\nselect : ");
+    scanf("%d", &selectNum);
+
+    if (selectNum == 1)
+    {
+        printf("새 비밀번호 입력 : ");
+        scanf("%s", tempString);
+        strcpy(clientLoggedIn->password, tempString);
+        printf("비밀번호 변경완료\n");
+        return;
+    }
+
+    else if (selectNum == 1)
+    {
+        printf("새 주소 입력 : ");
+        scanf("%s", tempString);
+        strcpy(clientLoggedIn->address, tempString);
+        printf("주소 변경완료\n");
+        return;
+    }
+
+    else if (selectNum == 3)
+    {
+        printf("새 전화번호 입력 : ");
+        scanf("%s", tempString);
+        strcpy(clientLoggedIn->address, tempString);
+        printf("전화번호 변경완료\n");
+        return;
+    }
+
+    else
+    {
+        ;
+    }
+
+    //printLog("내 개인정보 수정을 구현해야 합니다.");
     // TODO: 서현님
 }
 
 // 회원 탈퇴를 담당하는 함수입니다.
+
 void clientWithdraw()
 {
-    printLog("회원 탈퇴를 구현해야합니다.");
+    borrowStruct *tempHead = borrowHeadNode;
+    clientStruct *tempClientHead = clientHeadNode;
+
+    while (tempHead->nextNode != NULL)
+    {
+        if (tempHead->studentNumber == clientLoggedIn->studentNumber)
+        {
+            printf("대여중인 도서가 있으므로 회원탈퇴가 불가합니다.");
+            return;
+        }
+        else
+        {
+            tempHead = tempHead->nextNode;
+        }
+    }
+    while (tempClientHead != clientLoggedIn)
+    {
+        if (tempClientHead->nextNode == clientLoggedIn)
+        {
+            tempClientHead->nextNode = clientLoggedIn->nextNode;
+            free(clientLoggedIn);
+            printf("회원 탈퇴가 완료되었습니다.");
+            main();
+        }
+
+        else
+        {
+            tempClientHead = tempClientHead->nextNode;
+        }
+    }
+
+    //printLog("회원 탈퇴를 구현해야합니다.");
     // TODO: 서현님
 }
 
 // 회원 목록 출력을 담당하는 함수입니다.
 void printClientList()
 {
-    printLog("회원 목록 출력을 구현해야합니다.");
+    int i = 1;
+    clientStruct *tempClientHead = clientHeadNode;
+    printf(">>회원목록<<\n");
+    while (tempClientHead != NULL)
+    {
+        printf("%d. %s ( 학번 : %d )\n", i, tempClientHead->name, tempClientHead->studentNumber);
+        i++;
+        tempClientHead = tempClientHead->nextNode;
+    }
+
+    //printLog("회원 목록 출력을 구현해야합니다.");
     // TODO: 서현님
 }
 
@@ -638,6 +787,95 @@ void saveStringByDynamicAlloc(char **destPtr, char *sourcePtr)
 {
     *destPtr = (char *)malloc(strlen(sourcePtr) + 1);
     strcpy(*destPtr, sourcePtr);
+}
+
+// 타임 스탬프를 기준으로 요일 얻기
+uint8_t timestamp_to_weekday(timestamp_t timestamp_sec)
+{
+    uint8_t result = (timestamp_sec / ONE_DAY + UTC_TIME_WEEKDAY_OFFSET) % 7;
+    if (result == 0)
+    {
+        result = 7;
+    }
+    return result;
+}
+
+// 윤달 확인
+int is_leap_year(uint16_t year)
+{
+    if (year % 4 == 0 && ((year % 100) != 0) || ((year % 400) == 0))
+    {
+        return 1;
+    }
+    else
+        return 0;
+}
+
+// utc 타임 스탬프를 날짜로 변환
+void utc_timestamp_to_date(timestamp_t timestamp, datetime_t *datetime)
+{
+    uint8_t month;
+    uint32_t days;
+    uint16_t days_in_year;
+    uint16_t year;
+    timestamp_t second_in_day;
+
+    // 시/분/초 계산
+    second_in_day = timestamp % ONE_DAY;
+
+    //초
+    datetime->second = second_in_day % 60;
+
+    //분
+    second_in_day /= 60;
+    datetime->minute = second_in_day % 60;
+
+    //시
+    second_in_day /= 60;
+    datetime->hour = second_in_day % 24;
+
+    //1970-1-1 0:0:0부터 현재까지 총 일수
+    days = timestamp / ONE_DAY;
+
+    //days를 계속 차감하면서 해당 년도 계산
+    for (year = 1970; year <= 2200; year++)
+    {
+        if (is_leap_year(year))
+            days_in_year = 366;
+        else
+            days_in_year = 365;
+
+        if (days >= days_in_year)
+            days -= days_in_year;
+        else
+            break;
+    }
+
+    //년
+    datetime->year = year;
+
+    //요일
+    datetime->weekday = timestamp_to_weekday(timestamp);
+
+    //해당 년도 1월 1일을 기준으로 지금까지의 주(week) 계산
+    datetime->week = (days + 11 - datetime->weekday) / 7;
+
+    //월 계산하기
+    if (is_leap_year(datetime->year)) //윤달의 경우 2월이 29일이다.
+        month_days[2] = 29;
+    else
+        month_days[2] = 28;
+
+    //년도와 마찬가지로 일에서 계속 차감해서 찾는다.
+    for (month = 1; month <= 12; month++)
+    {
+        if (days >= month_days[month])
+            days -= month_days[month];
+        else
+            break;
+    }
+    datetime->month = month;
+    datetime->day = days + 1;
 }
 
 // 개발용 로그를 출력하는 함수입니다.
