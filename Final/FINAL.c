@@ -693,7 +693,7 @@ void clientWithdraw()
         }
     }
 
-    //printLog("회원 탈퇴를 구현해야합니다.");
+    // printLog("회원 탈퇴를 구현해야합니다.");
     // TODO: 서현님
 }
 
