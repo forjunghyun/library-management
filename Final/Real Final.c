@@ -62,6 +62,7 @@ clientStruct *clientHeadNode;
 clientStruct *clientNode;
 clientStruct *tempClientNode;
 clientStruct *clientLoggedIn;
+clientStruct *clientTail;
 
 bookStruct *bookHeadNode;
 bookStruct *bookNode;
@@ -76,6 +77,10 @@ borrowStruct *tempBorrowNode;
 void readFileToStruct_Client();
 void readFileToStruct_Book();
 void readFileToStruct_Borrow();
+
+void saveFileToStruct_Client();
+void saveFileToStruct_Book();
+void saveFileToStruct_Borrow();
 
 void menuPresenter_BookSearch();
 void menuPresenter_LibraryMain();
@@ -100,6 +105,7 @@ void searchBookByISBN();
 void searchBookByAuthor();
 void searchBookByAll();
 
+void saveAndExit();
 void saveStringByDynamicAlloc(char **destPtr, char *sourcePtr);
 uint8_t timestamp_to_weekday(timestamp_t timestamp_sec);
 int is_leap_year(uint16_t year);
@@ -156,12 +162,6 @@ void readFileToStruct_Client()
 
     // 잘 입력이 됐는지 출력하는 부분입니다.
     clientNode = clientHeadNode;
-    while (clientNode->nextNode != NULL)
-    {
-        printf("%d | %s | %s | %s | %s\n", clientNode->studentNumber, clientNode->password, clientNode->name, clientNode->address, clientNode->phoneNumber);
-        clientNode = clientNode->nextNode;
-    }
-    printLog("Read client.txt succes2s");
 }
 
 // book.txt를 bookStruct에 저장하는 함수입니다.
@@ -212,14 +212,6 @@ void readFileToStruct_Book()
                           // stream past delimiting character
     }
     fclose(book_file);
-    /* bookNode = bookHeadNode;
-    while (bookNode->nextNode != NULL)
-    {
-        // print list
-        printf("%d | %s | %s | %s | %s | %c | %d\n", bookNode->bookNumber, bookNode->bookName, bookNode->publisher, bookNode->author, bookNode->location, bookNode->canBorrow, bookNode->ISBN);
-        bookNode = bookNode->nextNode;
-    } */
-    printLog("Read book.txt success");
 }
 
 // borrow.txt를 borrowStruct에 저장하는 함수입니다.
@@ -257,17 +249,50 @@ void readFileToStruct_Borrow()
         borrowNode->nextNode = NULL;
     }
     fclose(borrow_file);
-
-    /*  borrowNode = borrowHeadNode;
-    while (borrowNode->nextNode != NULL)
-    {
-        printf("%d | %08d | %ld | %ld\n", borrowNode->studentNumber, borrowNode->bookNumber, borrowNode->borrowTime, borrowNode->returnTime);
-        borrowNode = borrowNode->nextNode;
-    } */
-    printLog("Read borrow.txt success");
 }
 
-// TODO: struct를 txt로 저장하는 함수들 전부 - 영현
+// ************************************************************
+// * 메모리상의 구조체의 내용을 txt로 저장하는 곳입니다.      *
+// ************************************************************
+void saveFileToStruct_Client()
+{
+    FILE *clientFileWriteStream = fopen("client.txt", "w");
+    clientNode = clientHeadNode;
+    while (clientNode->nextNode != NULL)
+    {
+        fprintf(clientFileWriteStream, "%d|%s|%s|%s|%s\n", clientNode->studentNumber, clientNode->password, clientNode->name, clientNode->address, clientNode->phoneNumber);
+        clientNode = clientNode->nextNode;
+    }
+    fclose(clientFileWriteStream);
+    printf("\n사용자 목록 저장이 성공적으로 완료되었습니다.\n");
+}
+
+void saveFileToStruct_Book()
+{
+    FILE *bookFileWriteStream = fopen("book.txt", "w");
+    bookNode = bookHeadNode;
+    while (bookNode != booktail)
+    {
+        // bookNumber, ISBN은 각각 7, 13자리 입니다.
+        fprintf(bookFileWriteStream, "%07d|%s|%s|%s|%013d|%s|%c\n", bookNode->bookNumber, bookNode->bookName, bookNode->publisher, bookNode->author, bookNode->ISBN, bookNode->location, bookNode->canBorrow);
+        bookNode = bookNode->nextNode;
+    }
+    fclose(bookFileWriteStream);
+    printf("도서 목록 저장이 성공적으로 완료되었습니다.\n");
+}
+
+void saveFileToStruct_Borrow()
+{
+    FILE *borrowFileWriteStream = fopen("borrow.txt", "w");
+    borrowNode = borrowHeadNode;
+    while (borrowNode->nextNode != NULL)
+    {
+        fprintf(borrowFileWriteStream, "%d|%07d|%d|%d\n", borrowNode->studentNumber, borrowNode->bookNumber, borrowNode->borrowTime, borrowNode->returnTime);
+        borrowNode = borrowNode->nextNode;
+    }
+    fclose(borrowFileWriteStream);
+    printf("대여 목록 저장이 성공적으로 완료되었습니다.\n");
+}
 
 // ************************************************************
 // * 메모리상의 구조체의 내용을 출력하는 함수들입니다.        *
@@ -276,7 +301,7 @@ void readFileToStruct_Borrow()
 void printStruct_Client()
 {
     clientNode = clientHeadNode;
-    while (clientNode != NULL)
+    while (clientNode->nextNode != NULL)
     {
         printf("%d | %s | %s | %s | %s\n", clientNode->studentNumber, clientNode->password, clientNode->name, clientNode->address, clientNode->phoneNumber);
         clientNode = clientNode->nextNode;
@@ -314,7 +339,7 @@ void menuPresenter_LibraryMain()
             login();
             break;
         case 3:
-            exit(1);
+            saveAndExit();
             break;
 
         default:
@@ -361,7 +386,7 @@ void menuPresenter_NormalClient()
             return;
             break;
         case 6:
-            exit(1);
+            saveAndExit();
             break;
         default:
             printf("잘못 입력하셨습니다.");
@@ -415,7 +440,7 @@ void menuPresenter_Administrator()
             return;
             break;
         case 8:
-            exit(1);
+            saveAndExit();
             break;
         default:
             printf("잘못 입력하셨습니다.");
@@ -438,7 +463,7 @@ void menuPresenter_BookSearch()
         printf("2. 출판사 검색\n");
         printf("3. ISBN 검색\n");
         printf("4. 저자명 검색\n");
-        printf("5. 전체 검색\n");
+        printf("5. 전체 목록\n");
         printf("6. 이전 메뉴\n\n");
         printf("번호를 선택하세요: ");
 
@@ -511,7 +536,7 @@ void signUp()
     // 코드입니다.
     clientStruct *StpFront = clientHeadNode;
     clientStruct *StpRear = clientHeadNode;
-    while (StpRear != 0) //	삽입 위치 검색 - 중간 삽입 코드
+    while (StpRear->nextNode != NULL) //	삽입 위치 검색 - 중간 삽입 코드
     {
         if (StpRear->studentNumber > newClient->studentNumber) // 삽입 위치 판단
         {
@@ -540,49 +565,54 @@ void login()
 {
     int tempInt;
     char tempString[50];
-    int true = 1;
-    clientStruct *temphead = clientHeadNode;
+    short isValidUser;
+    clientStruct *tempNode = clientHeadNode;
 
-    while (true)
+    isValidUser = 0;
+    printf("로그인명(학번) : ");
+    scanf("%s", tempString);
+
+    // 관리자인지 일단 먼저 검사
+    if (strcmp(tempString, "admin") == 0)
     {
-        printf("로그인명(학번) : ");
+        menuPresenter_Administrator();
+    }
+    else
+    {
+        // 학번 (아이디)를 입력받음.
+        tempInt = atoi(tempString);
+        printf("비밀번호 입력 : ");
         scanf("%s", tempString);
 
-        if (strcmp(tempString, "admin") == 0)
+        // 모든 client 노드들을 순환해서 검사.
+        while (tempNode->nextNode != NULL)
         {
-            menuPresenter_Administrator();
+            if (tempNode->studentNumber == tempInt && strcmp(tempNode->password, tempString) == 0)
+            {
+                clientLoggedIn = tempNode;
+                isValidUser = 1;
+                break;
+            }
+            else
+            {
+                tempNode = tempNode->nextNode;
+            }
         }
 
+        // 추후 로그아웃 했을 때 되돌아오기 위해 isValidUser 사용.
+        if (isValidUser)
+        {
+            menuPresenter_NormalClient();
+            printf("로그아웃이 완료되었습니다.\n\n");
+        }
         else
         {
-            tempInt = atoi(tempString);
-            printf("비밀번호 입력 : ");
-            scanf("%s", tempString);
-
-            while (temphead->nextNode != NULL)
-            {
-                if (temphead->studentNumber == tempInt && strcmp(temphead->password, tempString) == 0)
-                {
-                    clientLoggedIn = clientNode;
-                    menuPresenter_NormalClient();
-                    true = 0;
-                }
-                else
-                {
-                    temphead = temphead->nextNode;
-                }
-            }
-
-            if (temphead->nextNode == NULL)
-            {
-                printf("없는 회원입니다.");
-            }
+            printf("없는 회원입니다.\n\n");
         }
     }
 }
 
 // 내 도서 대여 목록을 보여주는 함수입니다.
-
 void showMyRentalList()
 {
     timestamp_t unix_timestamp1;
@@ -596,7 +626,6 @@ void showMyRentalList()
     {
         if (tempHead->studentNumber == clientLoggedIn->studentNumber)
         {
-
             printf("도서 번호 : %08d\n", tempHead->bookNumber);
 
             unix_timestamp1 = tempHead->borrowTime;
@@ -616,7 +645,6 @@ void showMyRentalList()
 }
 
 // 개인정보를 업데이트하는 함수입니다.
-
 void updateMyProfile()
 {
     int selectNum;
@@ -656,13 +684,9 @@ void updateMyProfile()
     {
         ;
     }
-
-    //printLog("내 개인정보 수정을 구현해야 합니다.");
-    // TODO: 서현님
 }
 
 // 회원 탈퇴를 담당하는 함수입니다.
-
 void clientWithdraw()
 {
     borrowStruct *tempHead = borrowHeadNode;
@@ -695,9 +719,6 @@ void clientWithdraw()
             tempClientHead = tempClientHead->nextNode;
         }
     }
-
-    // printLog("회원 탈퇴를 구현해야합니다.");
-    // TODO: 서현님
 }
 
 // 회원 목록 출력을 담당하는 함수입니다.
@@ -706,22 +727,18 @@ void printClientList()
     int i = 1;
     clientStruct *tempClientHead = clientHeadNode;
     printf(">>회원목록<<\n");
-    while (tempClientHead != NULL)
+    while (tempClientHead->nextNode != NULL)
     {
         printf("%d. %s ( 학번 : %d )\n", i, tempClientHead->name, tempClientHead->studentNumber);
         i++;
         tempClientHead = tempClientHead->nextNode;
     }
-
-    //printLog("회원 목록 출력을 구현해야합니다.");
-    // TODO: 서현님
 }
 
 // 도서를 등록하는 함수입니다.
 // 수정 부분 없습니다. 완료된 함수입니다.
 void registerBook()
 {
-    printLog("도서 등록을 구현해야합니다.");
     int bookNumber;
     char bookName[50];
     char publisher[50];
@@ -793,7 +810,6 @@ void registerBook()
 }
 
 // 도서를 삭제하는 함수입니다.
-// TODO : 도서를 중간노드삭제 코드를 완성해야 합니다.
 void removeBook()
 {
     int num, ISBN, bookdeletechecknum = 0, booknum;
@@ -801,10 +817,9 @@ void removeBook()
     char bookdeletecheck;
     bookStruct *bookSeeker = (bookStruct *)(malloc(sizeof(bookStruct)));
     bookSeeker = bookHeadNode;
-    printf("bookseeker bookname : %s\n", bookSeeker->bookName);
 
-    printLog(">>도서 삭제<<\n\n");
-    printf("1.도서명 검색 2. ISBN 검색\n\n");
+    printf(">>도서 삭제<<\n\n");
+    printf("1. 도서명 검색 2. ISBN 검색\n\n");
     printf("검색 번호를 입력하세요 : ");
     scanf("%d", &num);
     switch (num)
@@ -812,7 +827,7 @@ void removeBook()
     case 1:
         printf("\n도서명을 입력하세요 : ");
         scanf("%s", bookName);
-        printf("bookname : %s", bookName);
+        // printf("bookname : %s", bookName);
         while (booktail != bookSeeker)
         {
             if (strcmp(bookSeeker->bookName, bookName) == 0)
@@ -855,7 +870,7 @@ void removeBook()
         printf("\n삭제할 도서번호를 입력하세요 : ");
         scanf("%d", &booknum);
         getchar();
-        printf("\n\n이 도서를 삭제합니까? : ");
+        printf("\n\n이 도서를 삭제합니까? (Y/N) : ");
         scanf("%c", &bookdeletecheck);
         if (bookdeletecheck == 'Y')
         {
@@ -878,11 +893,6 @@ void removeBook()
                 StpFront = StpRear->nextNode; //front가 삭제할 노드의 다음을 가르킵니다.
 
                 bookHeadNode->nextNode = StpFront;
-                //삭제 완료 한 링크드리스트를 Head에 반영해야 하는데,오류가 납니다.
-
-                /****************************************************************
-                ***TODO: 삭제 완료한 링크드리스트를 HEAD에 반영해야 합니다.****
-                *****************************************************************/
             }
             else if (bookHeadNode == StpRear) // Head -> booknum 을 삭제
             {
@@ -899,40 +909,55 @@ void removeBook()
 }
 
 // 도서를 대여하는 함수입니다.
-//TODO : 도서 대여 완료 후 학생의 도서 대출 내역을 수정하는 함수를 구현해야 합니다. (빼도 괜찮을 것 같습니다.)
 void rentalBook()
 {
-    int num, ISBN, studentnum, booknum, bookborrowchecknum = 0;
+    int num, ISBN, studentnum, booknum;
     char bookName[50];
-    char bookborrowcheck;
+    char checkUserBorrow;
     bookStruct *bookSeeker = (bookStruct *)(malloc(sizeof(bookStruct)));
     bookSeeker = bookHeadNode;
-    printLog(">>도서 대여<<\n\n");
-    printf("1.도서명 검색 2. ISBN 검색\n\n");
+    printf(">>도서 대여<<\n\n");
+    printf("1. 도서명 검색 2. ISBN 검색\n\n");
     printf("검색 번호를 입력하세요 : ");
+
     scanf("%d", &num);
+
     switch (num)
     {
     case 1:
         printf("\n도서명을 입력하세요 : ");
         scanf("%s", bookName);
-        printf("bookname : %s", bookName);
         while (booktail != bookSeeker)
         {
             if (strcmp(bookSeeker->bookName, bookName) == 0)
             {
-                printf(">>검색결과<<\n");
-                printf("도서번호 : %d(대여 가능 여부 : %c) \n", bookSeeker->bookNumber, bookSeeker->canBorrow);
+                // 도서 이름으로 검색 성공하면.
+                printf("\n>>검색 결과<<\n");
+                printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookSeeker->bookNumber, bookSeeker->canBorrow);
                 printf("도서명 : %s\n", bookSeeker->bookName);
                 printf("출판사 : %s\n", bookSeeker->publisher);
                 printf("저자명 : %s\n", bookSeeker->author);
                 printf("ISBN : %d\n", bookSeeker->ISBN);
                 printf("소장처 : %s\n", bookSeeker->location);
-                bookborrowchecknum++;
+                if (bookSeeker->canBorrow == 'Y')
+                {
+                    printf("이 도서를 대여하시겠습니까? (Y/N)");
+                    scanf("%c", &checkUserBorrow);
+                    if (checkUserBorrow == 'Y')
+                    {
+                        bookSeeker->canBorrow = 'N';
+                    }
+                }
+                else
+                {
+                    printf("이 도서를 대여할 수 없습니다.\n\n");
+                }
+                break;
             }
             bookSeeker = bookSeeker->nextNode;
         }
         break;
+
     case 2:
         printf("\nISBN을 입력하세요 : ");
         scanf("%d", &ISBN);
@@ -946,40 +971,24 @@ void rentalBook()
                 printf("저자명 : %s\n", bookSeeker->author);
                 printf("ISBN : %d\n", bookSeeker->ISBN);
                 printf("소장처 : %s\n", bookSeeker->location);
-                bookborrowchecknum++;
+                if (bookSeeker->canBorrow == 'Y')
+                {
+                    printf("이 도서를 대여하시겠습니까? (Y/N)");
+                    scanf("%c", &checkUserBorrow);
+                    if (checkUserBorrow == 'Y')
+                    {
+                        bookSeeker->canBorrow = 'N';
+                    }
+                }
+                else
+                {
+                    printf("이 도서를 대여할 수 없습니다.\n\n");
+                }
+                break;
             }
             bookSeeker = bookSeeker->nextNode;
         }
         break;
-    }
-    if (bookborrowchecknum > 0)
-    {
-        printf("\n학번을 입력하세요 : ");
-        scanf("%d", &studentnum);
-        printf("\n도서번호를 입력하세요 : ");
-        scanf("%d", &booknum);
-        getchar();
-        printf("\n\n이 도서를 대여합니까? : ");
-        scanf("%c", &bookborrowcheck);
-        if (bookborrowcheck == 'Y')
-        {
-            while (1)
-            {
-                //BOOKNUM이 일치하는 노드를 찾을 때 까지 반복
-                if (bookHeadNode->bookNumber == booknum)
-                {
-                    bookHeadNode->canBorrow = 'N'; //책번호가 일치하면 도서 대여 가능 여부 N으로 바꾸기
-                }
-                bookHeadNode = bookHeadNode->nextNode;
-            } //도서 대출 완료
-
-            /*******************************************************
-             ********TODO: 학생의 도서 대여 정보 수정 코드**********
-             *************(빼도 괜찮을 것 같습니다)******************
-             *******************************************************/
-
-            printf("\n\n도서가 대여 되었습니다.\n\n ");
-        }
     }
 }
 
@@ -987,7 +996,6 @@ void rentalBook()
 // 세연님이 구현한 함수입니다.
 void returnBook()
 {
-    printLog("도서 반납을 구현해야합니다.");
     int studentnum, booknum, bookreturnchecknum = 0;
     char bookreturncheck;
     bookStruct *bookSeeker = (bookStruct *)(malloc(sizeof(bookStruct)));
@@ -1009,7 +1017,6 @@ void returnBook()
     {
         if (tempHead->studentNumber == clientLoggedIn->studentNumber)
         {
-
             printf("도서 번호 : %08d\n", tempHead->bookNumber);
 
             unix_timestamp1 = tempHead->borrowTime;
@@ -1037,10 +1044,11 @@ void returnBook()
     {
         while (1)
         {
-            //BOOKNUM이 일치하는 노드를 찾을 때 까지 반복
+            // BOOKNUM이 일치하는 노드를 찾을 때 까지 반복
             if (bookHeadNode->bookNumber == booknum)
             {
-                bookHeadNode->canBorrow = 'Y'; //책번호가 일치하면 도서 반납 완료 & 대여 가능 여부 N으로 바꾸기
+                bookHeadNode->canBorrow = 'Y'; // 책번호가 일치하면 도서 반납 완료 & 대여 가능 여부 N으로 바꾸기
+                break;
             }
             bookHeadNode = bookHeadNode->nextNode;
         }
@@ -1051,36 +1059,138 @@ void returnBook()
 // 도서를 검색하는 함수입니다 - byName
 void searchBookByName()
 {
-    printLog("도서 검색을 구현해야합니다. byName");
-    // TODO: 영현님
+    char targetBookName[100];
+    short found = 0;
+    bookNode = bookHeadNode;
+    printf("도서 제목을 입력하세요: ");
+    scanf("%s", targetBookName);
+    while (bookNode->nextNode != NULL)
+    {
+        if (strcmp(bookNode->bookName, targetBookName))
+        {
+            printf("\n도서를 찾았습니다.\n");
+            printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookNode->bookNumber, bookNode->canBorrow);
+            printf("도서명 : %s\n", bookNode->bookName);
+            printf("출판사 : %s\n", bookNode->publisher);
+            printf("저자명 : %s\n", bookNode->author);
+            printf("ISBN : %d\n", bookNode->ISBN);
+            printf("소장처 : %s\n", bookNode->location);
+            found = 1;
+            break;
+        }
+        bookNode = bookNode->nextNode;
+    }
+    if (found == 0)
+    {
+        printf("\n도서를 찾지못했습니다.\n");
+    }
 }
 
 // 도서를 검색하는 함수입니다 - byPublisher
 void searchBookByPublisher()
 {
-    printLog("도서 검색을 구현해야합니다. byPublisher");
-    // TODO: 영현님
+    char targetBookPublisher[100];
+    short found = 0;
+    bookNode = bookHeadNode;
+    printf("도서 출판사를 입력하세요: ");
+    scanf("%s", targetBookPublisher);
+    while (bookNode->nextNode != NULL)
+    {
+        if (strcmp(bookNode->publisher, targetBookPublisher))
+        {
+            printf("\n도서를 찾았습니다.\n");
+            printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookNode->bookNumber, bookNode->canBorrow);
+            printf("도서명 : %s\n", bookNode->bookName);
+            printf("출판사 : %s\n", bookNode->publisher);
+            printf("저자명 : %s\n", bookNode->author);
+            printf("ISBN : %d\n", bookNode->ISBN);
+            printf("소장처 : %s\n", bookNode->location);
+            found = 1;
+            break;
+        }
+        bookNode = bookNode->nextNode;
+    }
+    if (found == 0)
+    {
+        printf("\n도서를 찾지못했습니다.\n");
+    }
 }
 
 // 도서를 검색하는 함수입니다 - byISBN
 void searchBookByISBN()
 {
-    printLog("도서 검색을 구현해야합니다. byISBN");
-    // TODO: 영현님
+    int targetBookISBN;
+    short found = 0;
+    bookNode = bookHeadNode;
+    printf("도서 출판사를 입력하세요: ");
+    scanf("%d", &targetBookISBN);
+    while (bookNode->nextNode != NULL)
+    {
+        if (bookNode->ISBN == targetBookISBN)
+        {
+            printf("\n도서를 찾았습니다.\n");
+            printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookNode->bookNumber, bookNode->canBorrow);
+            printf("도서명 : %s\n", bookNode->bookName);
+            printf("출판사 : %s\n", bookNode->publisher);
+            printf("저자명 : %s\n", bookNode->author);
+            printf("ISBN : %d\n", bookNode->ISBN);
+            printf("소장처 : %s\n", bookNode->location);
+            found = 1;
+            break;
+        }
+        bookNode = bookNode->nextNode;
+    }
+    if (found == 0)
+    {
+        printf("\n도서를 찾지못했습니다.\n");
+    }
 }
 
 // 도서를 검색하는 함수입니다 - byAuthor
 void searchBookByAuthor()
 {
-    printLog("도서 검색을 구현해야합니다. byAuthor");
-    // TODO: 영현님
+    char targetBookAuthor[100];
+    short found = 0;
+    bookNode = bookHeadNode;
+    printf("도서 출판사를 입력하세요: ");
+    scanf("%s", targetBookAuthor);
+    while (bookNode->nextNode != NULL)
+    {
+        if (strcmp(bookNode->author, targetBookAuthor))
+        {
+            printf("\n도서를 찾았습니다.\n");
+            printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookNode->bookNumber, bookNode->canBorrow);
+            printf("도서명 : %s\n", bookNode->bookName);
+            printf("출판사 : %s\n", bookNode->publisher);
+            printf("저자명 : %s\n", bookNode->author);
+            printf("ISBN : %d\n", bookNode->ISBN);
+            printf("소장처 : %s\n", bookNode->location);
+            found = 1;
+            break;
+        }
+        bookNode = bookNode->nextNode;
+    }
+    if (found == 0)
+    {
+        printf("\n도서를 찾지못했습니다.\n");
+    }
 }
 
 // 도서를 검색하는 함수입니다 - byAll
 void searchBookByAll()
 {
-    printLog("도서 검색을 구현해야합니다. byAll");
-    // TODO: 영현님
+    bookNode = bookHeadNode;
+    while (bookNode->nextNode != NULL)
+    {
+        printf("\n\n도서를 찾았습니다.\n");
+        printf("도서번호 : %d (대여 가능 여부 : %c) \n", bookNode->bookNumber, bookNode->canBorrow);
+        printf("도서명 : %s\n", bookNode->bookName);
+        printf("출판사 : %s\n", bookNode->publisher);
+        printf("저자명 : %s\n", bookNode->author);
+        printf("ISBN : %d\n", bookNode->ISBN);
+        printf("소장처 : %s\n", bookNode->location);
+        bookNode = bookNode->nextNode;
+    }
 }
 
 // ************************************************************
@@ -1190,4 +1300,13 @@ void utc_timestamp_to_date(timestamp_t timestamp, datetime_t *datetime)
 void printLog(char *message)
 {
     printf("\n[LOG] %s\n", message);
+}
+
+// 파일들을 저장 후, 종료하는 함수입니다.
+void saveAndExit()
+{
+    saveFileToStruct_Client();
+    saveFileToStruct_Book();
+    saveFileToStruct_Borrow();
+    exit(1);
 }

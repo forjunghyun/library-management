@@ -1,100 +1,94 @@
-0000001|a|project perfect|Kimdonggyu|0000000000001|Soongsil University jeongbodae|N
-0000002|b|project perfect|Kimdonggyu|0000000000002|Soongsil University jeongbodae|N
-0000003|c|project perfect|Kimdonggyu|0000000000003|Soongsil University jeongbodae|N
-0000004|d|project perfect|Kimdonggyu|0000000000004|Soongsil University jeongbodae|N
-0000005|e|project perfect|Kimdonggyu|0000000000005|Soongsil University jeongbodae|N
-0000006|f|project perfect|Kimdonggyu|0000000000006|Soongsil University jeongbodae|N
-0000007|g|project perfect|Kimdonggyu|0000000000007|Soongsil University jeongbodae|N
-0000008|h|project perfect|Kimdonggyu|0000000000008|Soongsil University jeongbodae|N
-0000009|i|project perfect|Kimdonggyu|0000000000009|Soongsil University jeongbodae|N
-0000010|j|project perfect|Kimdonggyu|0000000000010|Soongsil University jeongbodae|N
-0000011|k|project perfect|Kimdonggyu|0000000000011|Soongsil University jeongbodae|N
-0000012|l|project perfect|Kimdonggyu|0000000000012|Soongsil University jeongbodae|N
-0000013|m|project perfect|Kimdonggyu|0000000000013|Soongsil University jeongbodae|N
-0000014|n|project perfect|Kimdonggyu|0000000000014|Soongsil University jeongbodae|N
-0000015|o|project perfect|Kimdonggyu|0000000000015|Soongsil University jeongbodae|N
-0000016|p|project perfect|Kimdonggyu|0000000000016|Soongsil University jeongbodae|N
-0000017|q|project perfect|Kimdonggyu|0000000000017|Soongsil University jeongbodae|N
-0000018|r|project perfect|Kimdonggyu|0000000000018|Soongsil University jeongbodae|N
-0000019|s|project perfect|Kimdonggyu|0000000000019|Soongsil University jeongbodae|N
-0000020|t|project perfect|Kimdonggyu|0000000000020|Soongsil University jeongbodae|N
-0000021|u|project perfect|Kimdonggyu|0000000000021|Soongsil University jeongbodae|Y
-0000022|v|project perfect|Kimdonggyu|0000000000022|Soongsil University jeongbodae|Y
-0000023|w|project perfect|Kimdonggyu|0000000000023|Soongsil University jeongbodae|Y
-0000024|x|project perfect|Kimdonggyu|0000000000024|Soongsil University jeongbodae|Y
-0000025|y|project perfect|Kimdonggyu|0000000000025|Soongsil University jeongbodae|Y
-0000026|z|project perfect|Kimdongwoon|0000000000026|Soongsil University jeongbodae|Y
-0000027|aa|project perfect|Kimdongwoon|0000000000027|Soongsil University jeongbodae|Y
-0000028|bb|project perfect|Kimdongwoon|0000000000028|Soongsil University jeongbodae|Y
-0000029|cc|project perfect|Kimdongwoon|0000000000029|Soongsil University jeongbodae|Y
-0000030|dd|project perfect|Kimdongwoon|0000000000030|Soongsil University jeongbodae|Y
-0000031|ee|project perfect|Kimdongwoon|0000000000031|Soongsil University jeongbodae|Y
-0000032|ff|project perfect|Kimdongwoon|0000000000032|Soongsil University jeongbodae|Y
-0000033|gg|project perfect|Kimdongwoon|0000000000033|Soongsil University jeongbodae|Y
-0000034|hh|project perfect|Kimdongwoon|0000000000034|Soongsil University jeongbodae|Y
-0000035|ii|project perfect|Kimdongwoon|0000000000035|Soongsil University jeongbodae|Y
-0000036|jj|project perfect|Kimdongwoon|0000000000036|Soongsil University Central Library|Y
-0000037|kk|project perfect|Kimdongwoon|0000000000037|Soongsil University Central Library|Y
-0000038|ll|project perfect|Kimdongwoon|0000000000038|Soongsil University Central Library|Y
-0000039|mm|project perfect|Kimdongwoon|0000000000039|Soongsil University Central Library|Y
-0000040|nn|project perfect|Kimdongwoon|0000000000040|Soongsil University Central Library|Y
-0000041|oo|project perfect|Kimdongwoon|0000000000041|Soongsil University Central Library|Y
-0000042|pp|project perfect|Kimdongwoon|0000000000042|Soongsil University Central Library|Y
-0000043|qq|project perfect|Kimdongwoon|0000000000043|Soongsil University Central Library|Y
-0000044|rr|project perfect|Kimdongwoon|0000000000044|Soongsil University Central Library|Y
-0000045|ss|project perfect|Kimdongwoon|0000000000045|Soongsil University Central Library|Y
-0000046|tt|project perfect|Kimdongwoon|0000000000046|Soongsil University Central Library|Y
-0000047|uu|project perfect|Kimdongwoon|0000000000047|Soongsil University Central Library|Y
-0000048|vv|project perfect|Kimdongwoon|0000000000048|Soongsil University Central Library|Y
-0000049|ww|project perfect|Kimdongwoon|0000000000049|Soongsil University Central Library|Y
-0000050|xx|project perfect|Kimdongwoon|0000000000050|Soongsil University Central Library|Y
-0000051|yy|project perfect|Kimsoeun|0000000000051|Soongsil University Central Library|Y
-0000052|zz|project perfect|Kimsoeun|0000000000052|Soongsil University Central Library|Y
-0000053|aaa|project perfect|Kimsoeun|0000000000053|Soongsil University Central Library|Y
-0000054|bbb|project perfect|Kimsoeun|0000000000054|Soongsil University Central Library|Y
-0000055|ccc|project perfect|Kimsoeun|0000000000055|Soongsil University Central Library|Y
-0000056|ddd|project perfect|Kimsoeun|0000000000056|Soongsil University Central Library|Y
-0000057|eee|project perfect|Kimsoeun|0000000000057|Soongsil University Central Library|Y
-0000058|fff|project perfect|Kimsoeun|0000000000058|Soongsil University Central Library|Y
-0000059|ggg|project perfect|Kimsoeun|0000000000059|Soongsil University Central Library|Y
-0000060|hhh|project perfect|Kimsoeun|0000000000060|Soongsil University Central Library|Y
-0000061|iii|project perfect|Kimsoeun|0000000000061|Soongsil University Central Library|Y
-0000062|jjj|project perfect|Kimsoeun|0000000000062|Soongsil University Central Library|Y
-0000063|kkk|project perfect|Kimsoeun|0000000000063|Soongsil University Central Library|Y
-0000064|lll|project perfect|Kimsoeun|0000000000064|Soongsil University Central Library|Y
-0000065|mmm|project perfect|Kimsoeun|0000000000065|Soongsil University Central Library|Y
-0000066|nnn|project perfect|Kimsoeun|0000000000066|Soongsil University Central Library|Y
-0000067|ooo|project perfect|Kimsoeun|0000000000067|Soongsil University Central Library|Y
-0000068|ppp|project perfect|Kimsoeun|0000000000068|Soongsil University Central Library|Y
-0000069|qqq|project perfect|Kimsoeun|0000000000069|Soongsil University Central Library|Y
-0000070|rrr|project perfect|Kimsoeun|0000000000070|Soongsil University Central Library|Y
-0000071|sss|project perfect|Kimsoeun|0000000000071|Soongsil University Central Library|Y
-0000072|ttt|project perfect|Kimsoeun|0000000000072|Soongsil University Central Library|Y
-0000073|uuu|project perfect|Kimsoeun|0000000000073|Soongsil University Central Library|Y
-0000074|vvv|project perfect|Kimsoeun|0000000000074|Soongsil University Central Library|Y
-0000075|www|project perfect|Kimsoeun|0000000000075|Soongsil University Central Library|Y
-0000076|xxx|project perfect|Simjiyeong|0000000000076|Soongsil University Central Library|Y
-0000077|yyy|project perfect|Simjiyeong|0000000000077|Soongsil University Central Library|Y
-0000078|zzz|project perfect|Simjiyeong|0000000000078|Soongsil University Central Library|Y
-0000079|abc|project perfect|Simjiyeong|0000000000079|Soongsil University Central Library|Y
-0000080|bcd|project perfect|Simjiyeong|0000000000080|Soongsil University Central Library|Y
-0000081|cde|project perfect|Simjiyeong|0000000000081|Soongsil University Central Library|Y
-0000082|def|project perfect|Simjiyeong|0000000000082|Soongsil University Central Library|Y
-0000083|efg|project perfect|Simjiyeong|0000000000083|Soongsil University Central Library|Y
-0000084|fgh|project perfect|Simjiyeong|0000000000084|Soongsil University Central Library|Y
-0000085|ghi|project perfect|Simjiyeong|0000000000085|Soongsil University Central Library|Y
-0000086|hij|project perfect|Simjiyeong|0000000000086|Soongsil University Central Library|Y
-0000087|ijk|project perfect|Simjiyeong|0000000000087|Soongsil University Central Library|Y
-0000088|jkl|project perfect|Simjiyeong|0000000000088|Soongsil University Central Library|Y
-0000089|klm|project perfect|Simjiyeong|0000000000089|Soongsil University Central Library|Y
-0000090|lmn|project perfect|Simjiyeong|0000000000090|Soongsil University Central Library|Y
-0000091|mno|project perfect|Simjiyeong|0000000000091|Soongsil University Central Library|Y
-0000092|nop|project perfect|Simjiyeong|0000000000092|Soongsil University Central Library|Y
-0000093|opq|project perfect|Simjiyeong|0000000000093|Soongsil University Central Library|Y
-0000094|pqr|project perfect|Simjiyeong|0000000000094|Soongsil University Central Library|Y
-0000095|qrs|project perfect|Simjiyeong|0000000000095|Soongsil University Central Library|Y
-0000096|rst|project perfect|Simjiyeong|0000000000096|Soongsil University Central Library|Y
-0000097|stu|project perfect|Simjiyeong|0000000000097|Soongsil University Central Library|Y
-0000098|tuv|project perfect|Simjiyeong|0000000000098|Soongsil University Central Library|Y
-0000099|uvw|project perfect|Simjiyeong|0000000000099|Soongsil University Central Library|Y
-0000100|xyz|project perfect|Simjiyeong|0000000000100|Soongsil University Central Library|Y
+0000001|a|project perfect|Kimdonggyu|000000000001|Soongsil University jeongbodae|N
+0000002|b|project perfect|Kimdonggyu|000000000002|Soongsil University jeongbodae|N
+0000003|c|project perfect|Kimdonggyu|000000000003|Soongsil University jeongbodae|N
+0000004|d|project perfect|Kimdonggyu|000000000004|Soongsil University jeongbodae|N
+0000005|e|project perfect|Kimdonggyu|000000000005|Soongsil University jeongbodae|N
+0000006|f|project perfect|Kimdonggyu|000000000006|Soongsil University jeongbodae|N
+0000007|g|project perfect|Kimdonggyu|000000000007|Soongsil University jeongbodae|N
+0000008|h|project perfect|Kimdonggyu|000000000008|Soongsil University jeongbodae|N
+0000009|i|project perfect|Kimdonggyu|000000000009|Soongsil University jeongbodae|N
+0000010|j|project perfect|Kimdonggyu|000000000010|Soongsil University jeongbodae|N
+0000011|k|project perfect|Kimdonggyu|000000000011|Soongsil University jeongbodae|N
+0000012|l|project perfect|Kimdonggyu|000000000012|Soongsil University jeongbodae|N
+0000013|m|project perfect|Kimdonggyu|000000000013|Soongsil University jeongbodae|N
+0000014|n|project perfect|Kimdonggyu|000000000014|Soongsil University jeongbodae|N
+0000015|o|project perfect|Kimdonggyu|000000000015|Soongsil University jeongbodae|N
+0000016|p|project perfect|Kimdonggyu|000000000016|Soongsil University jeongbodae|N
+0000017|q|project perfect|Kimdonggyu|000000000017|Soongsil University jeongbodae|N
+0000018|r|project perfect|Kimdonggyu|000000000018|Soongsil University jeongbodae|N
+0000019|s|project perfect|Kimdonggyu|000000000019|Soongsil University jeongbodae|N
+0000020|t|project perfect|Kimdonggyu|000000000020|Soongsil University jeongbodae|N
+0000021|u|project perfect|Kimdonggyu|000000000021|Soongsil University jeongbodae|Y
+0000022|v|project perfect|Kimdonggyu|000000000022|Soongsil University jeongbodae|Y
+0000023|w|project perfect|Kimdonggyu|000000000023|Soongsil University jeongbodae|Y
+0000024|x|project perfect|Kimdonggyu|000000000024|Soongsil University jeongbodae|Y
+0000025|y|project perfect|Kimdonggyu|000000000025|Soongsil University jeongbodae|Y
+0000026|z|project perfect|Kimdongwoon|000000000026|Soongsil University jeongbodae|Y
+0000027|aa|project perfect|Kimdongwoon|000000000027|Soongsil University jeongbodae|Y
+0000028|bb|project perfect|Kimdongwoon|000000000028|Soongsil University jeongbodae|Y
+0000029|cc|project perfect|Kimdongwoon|000000000029|Soongsil University jeongbodae|Y
+0000030|dd|project perfect|Kimdongwoon|000000000030|Soongsil University jeongbodae|Y
+0000031|ee|project perfect|Kimdongwoon|000000000031|Soongsil University jeongbodae|Y
+0000032|ff|project perfect|Kimdongwoon|000000000032|Soongsil University jeongbodae|Y
+0000033|gg|project perfect|Kimdongwoon|000000000033|Soongsil University jeongbodae|Y
+0000034|hh|project perfect|Kimdongwoon|000000000034|Soongsil University jeongbodae|Y
+0000035|ii|project perfect|Kimdongwoon|000000000035|Soongsil University jeongbodae|Y
+0000036|jj|project perfect|Kimdongwoon|000000000036|Soongsil University Central Library|Y
+0000037|kk|project perfect|Kimdongwoon|000000000037|Soongsil University Central Library|Y
+0000038|ll|project perfect|Kimdongwoon|000000000038|Soongsil University Central Library|Y
+0000039|mm|project perfect|Kimdongwoon|000000000039|Soongsil University Central Library|Y
+0000040|nn|project perfect|Kimdongwoon|000000000040|Soongsil University Central Library|Y
+0000041|oo|project perfect|Kimdongwoon|000000000041|Soongsil University Central Library|Y
+0000042|pp|project perfect|Kimdongwoon|000000000042|Soongsil University Central Library|Y
+0000043|qq|project perfect|Kimdongwoon|000000000043|Soongsil University Central Library|Y
+0000044|rr|project perfect|Kimdongwoon|000000000044|Soongsil University Central Library|Y
+0000045|ss|project perfect|Kimdongwoon|000000000045|Soongsil University Central Library|Y
+0000046|tt|project perfect|Kimdongwoon|000000000046|Soongsil University Central Library|Y
+0000047|uu|project perfect|Kimdongwoon|000000000047|Soongsil University Central Library|Y
+0000048|vv|project perfect|Kimdongwoon|000000000048|Soongsil University Central Library|Y
+0000049|ww|project perfect|Kimdongwoon|000000000049|Soongsil University Central Library|Y
+0000050|xx|project perfect|Kimdongwoon|000000000050|Soongsil University Central Library|Y
+0000051|yy|project perfect|Kimsoeun|000000000051|Soongsil University Central Library|Y
+0000052|zz|project perfect|Kimsoeun|000000000052|Soongsil University Central Library|Y
+0000053|aaa|project perfect|Kimsoeun|000000000053|Soongsil University Central Library|Y
+0000054|bbb|project perfect|Kimsoeun|000000000054|Soongsil University Central Library|Y
+0000055|ccc|project perfect|Kimsoeun|000000000055|Soongsil University Central Library|Y
+0000056|ddd|project perfect|Kimsoeun|000000000056|Soongsil University Central Library|Y
+0000057|eee|project perfect|Kimsoeun|000000000057|Soongsil University Central Library|Y
+0000058|fff|project perfect|Kimsoeun|000000000058|Soongsil University Central Library|Y
+0000059|ggg|project perfect|Kimsoeun|000000000059|Soongsil University Central Library|Y
+0000060|hhh|project perfect|Kimsoeun|000000000060|Soongsil University Central Library|Y
+0000061|iii|project perfect|Kimsoeun|000000000061|Soongsil University Central Library|Y
+0000062|jjj|project perfect|Kimsoeun|000000000062|Soongsil University Central Library|Y
+0000063|kkk|project perfect|Kimsoeun|000000000063|Soongsil University Central Library|Y
+0000064|lll|project perfect|Kimsoeun|000000000064|Soongsil University Central Library|Y
+0000065|mmm|project perfect|Kimsoeun|000000000065|Soongsil University Central Library|Y
+0000066|nnn|project perfect|Kimsoeun|000000000066|Soongsil University Central Library|Y
+0000067|ooo|project perfect|Kimsoeun|000000000067|Soongsil University Central Library|Y
+0000068|ppp|project perfect|Kimsoeun|000000000068|Soongsil University Central Library|Y
+0000069|qqq|project perfect|Kimsoeun|000000000069|Soongsil University Central Library|Y
+0000070|rrr|project perfect|Kimsoeun|000000000070|Soongsil University Central Library|Y
+0000071|sss|project perfect|Kimsoeun|000000000071|Soongsil University Central Library|Y
+0000072|ttt|project perfect|Kimsoeun|000000000072|Soongsil University Central Library|Y
+0000073|uuu|project perfect|Kimsoeun|000000000073|Soongsil University Central Library|Y
+0000074|vvv|project perfect|Kimsoeun|000000000074|Soongsil University Central Library|Y
+0000075|www|project perfect|Kimsoeun|000000000075|Soongsil University Central Library|Y
+0000076|xxx|project perfect|Simjiyeong|000000000076|Soongsil University Central Library|Y
+0000077|yyy|project perfect|Simjiyeong|000000000077|Soongsil University Central Library|Y
+0000078|zzz|project perfect|Simjiyeong|000000000078|Soongsil University Central Library|Y
+0000079|abc|project perfect|Simjiyeong|000000000079|Soongsil University Central Library|Y
+0000080|bcd|project perfect|Simjiyeong|000000000080|Soongsil University Central Library|Y
+0000081|cde|project perfect|Simjiyeong|000000000081|Soongsil University Central Library|Y
+0000082|def|project perfect|Simjiyeong|000000000082|Soongsil University Central Library|Y
+0000083|efg|project perfect|Simjiyeong|000000000083|Soongsil University Central Library|Y
+0000084|fgh|project perfect|Simjiyeong|000000000084|Soongsil University Central Library|Y
+0000085|ghi|project perfect|Simjiyeong|000000000085|Soongsil University Central Library|Y
+0000086|hij|project perfect|Simjiyeong|000000000086|Soongsil University Central Library|Y
+0000087|ijk|project perfect|Simjiyeong|000000000087|Soongsil University Central Library|Y
+0000088|jkl|project perfect|Simjiyeong|000000000088|Soongsil University Central Library|Y
+0000089|klm|project perfect|Simjiyeong|000000000089|Soongsil University Central Library|Y
+0000090|lmn|project perfect|Simjiyeong|000000000090|Soongsil University Central Library|Y
+0000091|mno|project perfect|Simjiyeong|000000000091|Soongsil University Central Library|Y
+0000092|nop|project perfect|Simjiyeong|000000000092|Soongsil University Central Library|Y
+0000093|opq|project perfect|Simjiyeong|000000000093|Soongsil University Central Library|Y
+0000094|pqr|project perfect|Simjiyeong|000000000094|Soongsil University Central Library|Y
